@@ -6,20 +6,20 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:17:25 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:17:26 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/05/18 18:37:58 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 #include "../inc/get_next_line.h"
 
-t_lst	*read_map(char *av)
+t_lst	*read_map(char *av)		//կարդում է քարտեզը, ավելացնում է լիստի մեջ տողերին եթե հիշողություն չի կարողանում հատկացնել ազատում է մինչև այդ զբաղեցրածները
 {
 	int		fd;
 	char	*line;
 	t_lst	*map;
 
-	if (!name_check_file(av))
+	if (!name_check_file(av))	
 		err("Invalid map!\n");
 	map = 0;
 	fd = open(av, O_RDONLY);

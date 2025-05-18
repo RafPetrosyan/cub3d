@@ -6,7 +6,7 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:17:44 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:17:45 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/05/18 18:28:51 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,23 @@ void move_right(t_cub *cub)
 
 int moveing(int key, t_cub *cub)
 {
-	if (key == XK_Escape)   // Ubuntu equivalent for ESC
+	if (key == XK_Escape)
 		esc(cub);
 	if (key == XK_space)
 		cub->play = true;
 	else if (key == XK_e)
 		try_to_open_door(cub);
-	else if (key == XK_w)
+	else if (key == 16778616)
 		move_forward(cub);
-	else if (key == XK_s)
+	else if (key == 16778621)
 		move_back(cub);
-	else if (key == XK_d)
-		move_right(cub);  // Corrected movement direction
-	else if (key == XK_a)
-		move_left(cub);   // Corrected movement direction
-	else if (key == XK_Left)
+	else if (key == 16778596)
+		move_right(cub);
+	else if (key == 16778593)
+		move_left(cub);
+	else if (key == 65363)
 		rot_left(cub);
-	else if (key == XK_Right)
+	else if (key == 65361)
 		rot_right(cub);
 	return (0);
 }
