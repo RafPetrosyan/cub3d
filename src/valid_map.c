@@ -84,7 +84,6 @@ void	tabs_to_spaces(char **map, t_cub *cub)
 		}
 	}
 }
-
 void	check_borders(char **map, t_cub *cub)
 {
 	int	i;
@@ -96,6 +95,9 @@ void	check_borders(char **map, t_cub *cub)
 		j = -1;
 		while (map[i][++j])
 		{
+			if (i == 0 || map[i + 1] == NULL)
+				continue; // skip top/bottom border
+
 			if ((map[i][j] == '0' || map[i][j] == 'N'
 				|| map[i][j] == 'S' || map[i][j] == 'E'
 				|| map[i][j] == 'W' || map[i][j] == 'O'
@@ -106,7 +108,7 @@ void	check_borders(char **map, t_cub *cub)
 				|| !map[i][j + 1] || ft_isspace(map[i][j + 1])))
 			{
 				free_cub(cub);
-				err("Invalid map(invalid borders)\n");
+				err("Invalid map (invalid borders)\n");
 			}
 		}
 	}
