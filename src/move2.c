@@ -6,7 +6,7 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:17:50 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:17:51 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/13 20:15:54 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ void	try_to_open_door(t_cub *cub)
 		cub->map[x][y] = 'C';
 }
 
-int	mouse_rot(int x, t_cub *cub)
+int	mouse_rot(int x, int y, t_cub *cub)
 {
 	static int	past_view;
 
+	(void) y;
 	if (x < past_view)
 		rot_right(cub);
 	else if (x > past_view)

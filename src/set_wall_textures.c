@@ -6,7 +6,7 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:18:23 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:18:24 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:43:14 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	set_south_texture(t_cub *cub)
 		if (cub->south.img)
 			mlx_destroy_image(cub->mlx.mlx, cub->south.img);
 		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
-		free_cub(cub);
-		err("Coudn't open wall textures\n");
+		clear_cub(cub);
+		err("Can not open wall textures\n");
 	}
 	cub->south.wd = width;
 	cub->south.ht = height;
@@ -47,8 +47,8 @@ void	set_north_texture(t_cub *cub)
 		if (cub->north.img)
 			mlx_destroy_image(cub->mlx.mlx, cub->north.img);
 		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
-		free_cub(cub);
-		err("Coudn't open wall textures\n");
+		clear_cub(cub);
+		err("Can not open wall textures\n");
 	}
 	cub->north.wd = width;
 	cub->north.ht = height;
@@ -71,8 +71,8 @@ void	set_west_texture(t_cub *cub)
 		if (cub->west.img)
 			mlx_destroy_image(cub->mlx.mlx, cub->west.img);
 		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
-		free_cub(cub);
-		err("Coudn't open wall textures\n");
+		clear_cub(cub);
+		err("Can not open wall textures\n");
 	}
 	cub->west.wd = width;
 	cub->west.ht = height;
@@ -95,8 +95,8 @@ void	set_east_texture(t_cub *cub)
 		if (cub->east.img)
 			mlx_destroy_image(cub->mlx.mlx, cub->east.img);
 		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
-		free_cub(cub);
-		err("Coudn't open wall textures\n");
+		clear_cub(cub);
+		err("Can not open wall textures\n");
 	}
 	cub->east.wd = width;
 	cub->east.ht = height;

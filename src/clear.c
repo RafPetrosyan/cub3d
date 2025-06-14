@@ -6,30 +6,29 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:16:44 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:16:45 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:43:14 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/cub3d.h"
 
 void	free_map_struct(t_lst *map)
 {
-	t_lst	*tmp;
+	t_lst	*temp;
 
 	if (!map)
 		return ;
 	while (map)
 	{
 		free(map->line);
-		tmp = map->next;
+		temp = map->next;
 		free(map);
-		map = tmp;
+		map = temp;
 	}
 	map = NULL;
 }
 
-void	free_array(char **map)
+void	clear_arr(char **map)
 {
 	int	i;
 
@@ -45,7 +44,7 @@ void	free_array(char **map)
 	map = NULL;
 }
 
-void	free_types(t_type *types)
+void	clear_types(t_type *types)
 {
 	if (!types)
 		return ;
@@ -64,13 +63,14 @@ void	free_types(t_type *types)
 	free(types);
 }
 
-void	free_cub(t_cub *cub)
+void	clear_cub(t_cub *cub)
 {
-	free_array(cub->map);
+	clear_arr(cub->map);
 	cub->map = NULL;
-	free_types(cub->types);
+	clear_types(cub->types);
 	cub->types = NULL;
 	if (cub->gun)
 		free(cub->gun);
 	cub->gun = NULL;
+	free(cub);
 }

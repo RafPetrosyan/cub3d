@@ -6,7 +6,7 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:18:57 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:18:58 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 20:00:42 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	**lst_to_array(t_lst *map_stract, t_type *types)
 	if (!map)
 	{
 		free_map_struct(map_stract);
-		free_types(types);
-		err("Malloc error!\n");
+		clear_types(types);
+		err("Memory allocation error!\n");
 	}
 	i = -1;
 	len = ft_lstsize(map_stract);
@@ -47,8 +47,8 @@ char	*replace_tab_with_spaces(char **map, int i, int j, t_cub *cub)
 	new_str = malloc(sizeof(char) * (ft_strlen(map[i]) + 5));
 	if (!new_str)
 	{
-		free_cub(cub);
-		err("Malloc error\n");
+		clear_cub(cub);
+		err("Memory allocation error\n");
 	}
 	n = -1;
 	while (++n < j)
@@ -84,6 +84,7 @@ void	tabs_to_spaces(char **map, t_cub *cub)
 		}
 	}
 }
+
 void	check_borders(char **map, t_cub *cub)
 {
 	int	i;
@@ -96,19 +97,18 @@ void	check_borders(char **map, t_cub *cub)
 		while (map[i][++j])
 		{
 			if (i == 0 || map[i + 1] == NULL)
-				continue; // skip top/bottom border
-
+				continue ;
 			if ((map[i][j] == '0' || map[i][j] == 'N'
+				|| map[i][j] == 'O' || map[i][j] == 'W'
 				|| map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W' || map[i][j] == 'O'
 				|| map[i][j] == 'C')
 				&& ((ft_strlen(map[i - 1]) < j || ft_isspace(map[i - 1][j]))
 				|| (j == 0 || ft_isspace(map[i][j - 1]))
 				|| (ft_strlen(map[i + 1]) < j || ft_isspace(map[i + 1][j]))
 				|| !map[i][j + 1] || ft_isspace(map[i][j + 1])))
 			{
-				free_cub(cub);
-				err("Invalid map (invalid borders)\n");
+				clear_cub(cub);
+				err("Map is not valid`(invalid borders)\n");
 			}
 		}
 	}
@@ -131,8 +131,8 @@ void	check_doors(char **map, t_cub *cub)
 			&& !(map[i][j - 1] && map[i][j - 1] == '1'
 			&& map[i][j + 1] && map[i][j + 1] == '1'))
 			{
-				free_cub(cub);
-				err("Invalid map(invalid doors)\n");
+				clear_cub(cub);
+				err("Map is not valid`(invalid doors)\n");
 			}
 		}
 	}

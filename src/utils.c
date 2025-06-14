@@ -6,20 +6,20 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:18:43 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:18:44 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:57:22 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	ft_strlen(char *s)
+int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!s)
+	if (!str)
 		return (0);
-	while (s[i])
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -46,7 +46,7 @@ void	ft_lstadd_back(t_lst **lst, char *new)
 	if (!node)
 	{
 		free_map_struct(*lst);
-		err("malloc error!\n");
+		err("Memory allocation error!\n");
 	}
 	node -> next = NULL;
 	node -> line = new;

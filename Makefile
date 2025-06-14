@@ -15,7 +15,7 @@ SRCS_NAME = main.c \
 			get_next_line.c \
 			get_next_line_utils.c \
 			err_exit.c \
-			free.c \
+			clear.c \
 			utils.c \
 			valid_map.c \
 			struct_map_check.c \
@@ -25,10 +25,10 @@ SRCS_NAME = main.c \
 			type_identifier2.c \
 			utils2.c \
 			ft_split_color.c \
-			initialization.c \
-			initialization2.c \
-			movements.c \
-			movements2.c \
+			init.c \
+			init2.c \
+			move.c \
+			move2.c \
 			set_wall_textures.c \
 			set_gun_textures.c \
 			set_textures.c \

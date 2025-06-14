@@ -6,25 +6,25 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:17:25 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 18:37:58 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:24:47 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 #include "../inc/get_next_line.h"
 
-t_lst	*read_map(char *av)		//կարդում է քարտեզը, ավելացնում է լիստի մեջ տողերին եթե հիշողություն չի կարողանում հատկացնել ազատում է մինչև այդ զբաղեցրածները
+t_lst	*read_map(char *argv)
 {
 	int		fd;
 	char	*line;
 	t_lst	*map;
 
-	if (!name_check_file(av))	
-		err("Invalid map!\n");
+	if (!name_check_file(argv))
+		err("Map is not valid\n");
 	map = 0;
-	fd = open(av, O_RDONLY);
+	fd = open(argv, O_RDONLY);
 	if (fd < 0)
-		err("Invalid map!\n");
+		err("IMap is not valid\n");
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -34,7 +34,7 @@ t_lst	*read_map(char *av)		//կարդում է քարտեզը, ավելացնո�
 	}
 	close(fd);
 	if (!map)
-		err("Invalid map\n");
+		err("Map is not valid\n");
 	return (map);
 }
 
@@ -66,15 +66,15 @@ void	get_player_position(t_cub *cub)
 
 void	set_direction(t_cub *cub, char c)
 {
-	if (c == 'N')
-	{
-		cub->player.plane_y = 0.66;
-		cub->player.dir_x = -1.0;
-	}
-	else if (c == 'S')
+	if (c == 'S')
 	{
 		cub->player.plane_y = -0.66;
 		cub->player.dir_x = 1.0;
+	}
+	else if (c == 'N')
+	{
+		cub->player.plane_y = 0.66;
+		cub->player.dir_x = -1.0;
 	}
 	else if (c == 'W')
 	{

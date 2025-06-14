@@ -6,7 +6,7 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:17:20 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:17:21 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:43:14 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_cub	*init_cub(char **map, t_type *types)
 	cub = malloc(sizeof(t_cub));
 	if (!cub)
 	{
-		free_types(types);
-		err("Malloc error\n");
+		clear_types(types);
+		err("Memory allocation error\n");
 	}
 	cub->map = map;
 	cub->types = types;
@@ -31,56 +31,56 @@ t_cub	*init_cub(char **map, t_type *types)
 	return (cub);
 }
 
-t_cub	*init_game(char *av)
+t_cub	*start_cub(char *argv)
 {
-	t_lst	*map_struct;
+	t_lst	*map_str;
 	t_type	*types;
 	char	**map;
 
-	map_struct = read_map(av);
-	types = type_identifiers(&map_struct);
+	map_str = read_map(argv);
+	types = type_identifiers(&map_str);
 	if (!types || !types->north || !types->west
 		|| !types->east || !types->floor_color || !types->ceiling_color)
 	{
-		free_types(types);
-		free_map_struct(map_struct);
-		err("Invalid map(missing types)\n");
+		clear_types(types);
+		free_map_struct(map_str);
+		err("Map is not valid`(missing types)\n");
 	}
-	check_valid_chars(map_struct, types);
-	remove_free_lines_start(&map_struct);
-	remove_free_lines_end(&map_struct, types);
-	if (!map_struct)
+	check_valid_chars(map_str, types);
+	clear_empty_lines_begin(&map_str);
+	clear_empty_lines_finish(&map_str, types);
+	if (!map_str)
 	{
-		free_types(types);
-		err("Invalid map!\n");
+		clear_types(types);
+		err("Map is not valid\n");
 	}
-	map = lst_to_array(map_struct, types);
+	map = lst_to_array(map_str, types);
 	return (init_cub(map, types));
 }
 
 void	init_textutes(t_cub *cub)
 {
-	set_south_texture(cub);
-	set_north_texture(cub);
-	set_west_texture(cub);
-	set_east_texture(cub);
-	set_close_door_texture(cub);
 	set_open_door_texture(cub);
+	set_close_door_texture(cub);
+	set_east_texture(cub);
+	set_west_texture(cub);
+	set_north_texture(cub);
+	set_south_texture(cub);
 	set_guns(cub);
-	if (!cub->south.addr || !cub->north.addr || !cub->west.addr
-		|| !cub->east.addr || !cub->od.addr || !cub->cd.addr
+	if (!cub->od.addr || !cub->north.addr || !cub->west.addr
+		|| !cub->east.addr || !cub->south.addr || !cub->cd.addr
 		|| !cub->gun[0].addr || !cub->gun[1].addr
 		|| !cub->gun[2].addr || !cub->gun[3].addr
 		|| !cub->gun[4].addr)
 	{
 		destroy_doors_and_walls(cub);
 		destroy_guns(cub);
-		free_cub(cub);
-		err("Coudn't open texture!\n");
+		clear_cub(cub);
+		err("Can not open textures\n");
 	}
 }
 
-void	init_mlx(t_cub *cub)
+void	mlx_struct_init(t_cub *cub)
 {
 	cub->map_wd = 1080;
 	cub->map_ht = 720;
@@ -100,9 +100,8 @@ void	init_mlx(t_cub *cub)
 	cub->mlx.win = mlx_new_window(cub->mlx.mlx,
 			cub->map_wd, cub->map_ht, "cub3D");
 	init_textutes(cub);
-	mlx_hook(cub->mlx.win, 6, 0, &mouse_rot, cub);
+	mlx_hook(cub->mlx.win, 6, 1L << 6, mouse_rot, cub);
 	mlx_hook(cub->mlx.win, 2, 1L << 0, &moveing, cub);
-
 	mlx_loop_hook(cub->mlx.mlx, &ft_redraw, cub);
 	mlx_hook(cub->mlx.win, 17, 0, ext, cub);
 	mlx_loop(cub->mlx.mlx);

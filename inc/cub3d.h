@@ -6,7 +6,7 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:19:29 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:19:30 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:53:28 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,9 +198,9 @@ void			esc(t_cub *cub);
 
 //free.c
 void			free_map_struct(t_lst *map);
-void			free_array(char **map);
-void			free_types(t_type *types);
-void			free_cub(t_cub *cub);
+void			clear_arr(char **map);
+void			clear_types(t_type *types);
+void			clear_cub(t_cub *cub);
 
 //valid_map.c
 char			**lst_to_array(t_lst *map_stract, t_type *types);
@@ -211,8 +211,8 @@ void			check_doors(char **map, t_cub *cub);
 
 //initialization.c
 t_cub			*init_cub(char **map, t_type *types);
-t_cub			*init_game(char *av);
-void			init_mlx(t_cub *cub);
+t_cub			*start_cub(char *av);
+void			mlx_struct_init(t_cub *cub);
 
 //initialization2.c
 t_lst			*read_map(char *av);
@@ -223,13 +223,13 @@ void			set_direction(t_cub *cub, char c);
 int				check_char(t_type *types, char c, t_lst *map, int flag);
 void			check_valid_chars(t_lst *map, t_type *types);
 int				there_is_valid_char(char *s);
-void			remove_free_lines_start(t_lst **map);
-void			remove_free_lines_end(t_lst **map, t_type *types);
+void			clear_empty_lines_begin(t_lst **map);
+void			clear_empty_lines_finish(t_lst **map, t_type *types);
 
 //type_identifier.c
-void			init_type_struct(t_type *types);
+void			types_init_struct(t_type *types);
 int				type_name(char *to_check, char *with, char *file);
-void			init_type(t_type *types, t_lst *map, char **split);
+void			types_init(t_type *types, t_lst *map, char **split);
 void			check_identifier(t_lst **map, t_type *types);
 t_type			*type_identifiers(t_lst **map);
 
@@ -261,7 +261,7 @@ int				moveing(int key, t_cub *cub);
 void			rot_left(t_cub *cub);
 void			rot_right(t_cub *cub);
 void			try_to_open_door(t_cub *cub);
-int				mouse_rot(int x, t_cub *cub);
+int				mouse_rot(int x, int y, t_cub *cub);
 
 //raycasting.c
 void			raycasting(t_cub *cub);
@@ -281,7 +281,7 @@ void			set_close_door_texture(t_cub *cub);
 void			set_open_door_texture(t_cub *cub);
 
 //minimap.c
-void			draw_square(double i, double j, t_cub *cub, int color);
+void			paint_square(double i, double j, t_cub *cub, int color);
 void			minimap(t_cub *cub);
 
 //set_gun_textures.c

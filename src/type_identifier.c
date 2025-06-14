@@ -6,20 +6,20 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:18:33 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:18:34 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:55:01 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	init_type_struct(t_type *types)
+void	types_init_struct(t_type *types)
 {
-	types->north = NULL;
-	types->south = NULL;
-	types->west = NULL;
-	types->east = NULL;
 	types->floor_color = NULL;
 	types->ceiling_color = NULL;
+	types->west = NULL;
+	types->east = NULL;
+	types->north = NULL;
+	types->south = NULL;
 }
 
 int	type_name(char *to_check, char *with, char *file)
@@ -44,7 +44,7 @@ int	type_name(char *to_check, char *with, char *file)
 	return (1);
 }
 
-void	init_type(t_type *types, t_lst *map, char **split)
+void	types_init(t_type *types, t_lst *map, char **split)
 {
 	if (type_name(split[0], "NO", split[1]) && !types->north)
 		types->north = split[1];
@@ -75,26 +75,26 @@ void	init_type(t_type *types, t_lst *map, char **split)
 void	check_identifier(t_lst **map, t_type *types)
 {
 	char	**split;
-	t_lst	*tmp;
+	t_lst	*temp;
 
 	if (ft_words_count((*map)->line) != 2)
 	{
-		free_types(types);
+		clear_types(types);
 		free_map_struct(*map);
 		err("Type identifier error\n");
 	}
 	split = ft_split((*map)->line);
 	if (!split)
 	{
-		free_types(types);
+		clear_types(types);
 		free_map_struct(*map);
 		err("Split error\n");
 	}
-	init_type(types, *map, split);
-	tmp = (*map)->next;
+	types_init(types, *map, split);
+	temp = (*map)->next;
 	free((*map)->line);
 	free((*map));
-	*map = tmp;
+	*map = temp;
 }
 
 t_type	*type_identifiers(t_lst **map)
@@ -105,18 +105,18 @@ t_type	*type_identifiers(t_lst **map)
 	if (!types)
 	{
 		free_map_struct(*map);
-		err("Malloc error\n");
+		err("Memory allocation error\n");
 	}
-	init_type_struct(types);
+	types_init_struct(types);
 	while (map && *map)
 	{
-		remove_free_lines_start(map);
+		clear_empty_lines_begin(map);
 		if (map && *map && (ft_strstr((*map)->line, "NO")
-				|| ft_strstr((*map)->line, "SO")
-				|| ft_strstr((*map)->line, "WE")
 				|| ft_strstr((*map)->line, "EA")
-				|| ft_strstr((*map)->line, "F")
-				|| ft_strstr((*map)->line, "C")))
+				|| ft_strstr((*map)->line, "WE")
+				|| ft_strstr((*map)->line, "SO")
+				|| ft_strstr((*map)->line, "C")
+				|| ft_strstr((*map)->line, "F")))
 			check_identifier(map, types);
 		else
 			break ;

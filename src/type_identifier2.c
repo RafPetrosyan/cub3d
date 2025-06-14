@@ -6,7 +6,7 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:18:37 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:18:38 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:42:34 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_color	*type_set_color(char *str)
 	rgb->r = ft_atoi(split[0]);
 	rgb->g = ft_atoi(split[1]);
 	rgb->b = ft_atoi(split[2]);
-	free_array(split);
+	clear_arr(split);
 	free(str);
 	if (rgb->r < 0 || rgb->g < 0 || rgb->b < 0)
 	{
@@ -41,7 +41,7 @@ t_color	*type_set_color(char *str)
 
 void	type_error(t_type *types, char **split, t_lst *map)
 {
-	free_types(types);
+	clear_types(types);
 	free(split[0]);
 	free(split);
 	free_map_struct(map);

@@ -6,7 +6,7 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:18:18 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:18:19 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:43:14 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	set_close_door_texture(t_cub *cub)
 		if (cub->cd.img)
 			mlx_destroy_image(cub->mlx.mlx, cub->cd.img);
 		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
-		free_cub(cub);
-		err("Coudn't open door textures\n");
+		clear_cub(cub);
+		err("Can not open door textures\n");
 	}
 	cub->cd.wd = width;
 	cub->cd.ht = height;
@@ -54,8 +54,8 @@ void	set_open_door_texture(t_cub *cub)
 		if (cub->od.img)
 			mlx_destroy_image(cub->mlx.mlx, cub->od.img);
 		mlx_destroy_window(cub->mlx.mlx, cub->mlx.win);
-		free_cub(cub);
-		err("Coudn't open door textures\n");
+		clear_cub(cub);
+		err("Can not open door textures\n");
 	}
 	cub->od.wd = width;
 	cub->od.ht = height;

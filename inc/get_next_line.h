@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/18 14:19:26 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:19:27 by rafpetro         ###   ########.fr       */
+/*   Created: 2024/03/04 16:42:14 by rafpetro          #+#    #+#             */
+/*   Updated: 2025/06/14 20:16:27 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_list
-{
-	char			*content;
-	struct s_list	*next;
-}	t_list;
-
-int		look_for_newline(char *str);
-int		there_is_nl(char *str);
-int		list_len(t_list *lst);
 char	*get_next_line(int fd);
-char	*ft_strdup(const char *s1);
-char	*create_line(t_list *lst, int line_len);
-void	add_to_list(t_list **lst, char *str);
-void	create_list(t_list **lst, int fd);
-void	clear_list(t_list **lst);
-size_t	ft_strlen_gnl(const char *s);
+int		ft_check(char *str);
+char	*ft_strjoin(char *s1, char *s2, int read_size);
+void	ft_strjoin_helper(char *s1, char *s2, char *str, int read_size);
+int		get_index(char *str);
+size_t	ft_strlen_gnl(char *str);
+void	rearrange(char *str);
 
 #endif

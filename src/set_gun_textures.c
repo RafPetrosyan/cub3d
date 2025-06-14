@@ -6,7 +6,7 @@
 /*   By: rafpetro <rafpetro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 14:18:14 by rafpetro          #+#    #+#             */
-/*   Updated: 2025/05/18 14:18:15 by rafpetro         ###   ########.fr       */
+/*   Updated: 2025/06/14 19:43:14 by rafpetro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	set_gun_0_1(t_cub *cub)
 	if (!cub->gun[0].img)
 	{
 		destroy_doors_and_walls(cub);
-		free_cub(cub);
-		err("Couldn't open texture!\n");
+		clear_cub(cub);
+		err("Can not open texture\n");
 	}
 	cub->gun[1].img = mlx_xpm_file_to_image(cub->mlx.mlx,
 			"./textures/2.xpm", &cub->gun[1].wd,
@@ -30,8 +30,8 @@ void	set_gun_0_1(t_cub *cub)
 	{
 		destroy_doors_and_walls(cub);
 		mlx_destroy_image(cub->mlx.mlx, cub->gun[0].img);
-		free_cub(cub);
-		err("Couldn't open texture!\n");
+		clear_cub(cub);
+		err("Can not open texture\n");
 	}
 }
 
@@ -45,8 +45,8 @@ void	set_gun_2_3(t_cub *cub)
 		destroy_doors_and_walls(cub);
 		mlx_destroy_image(cub->mlx.mlx, cub->gun[0].img);
 		mlx_destroy_image(cub->mlx.mlx, cub->gun[1].img);
-		free_cub(cub);
-		err("Couldn't open texture!\n");
+		clear_cub(cub);
+		err("Can not open texture\n");
 	}
 	cub->gun[3].img = mlx_xpm_file_to_image(cub->mlx.mlx,
 			"./textures/4.xpm", &cub->gun[3].wd,
@@ -57,8 +57,8 @@ void	set_gun_2_3(t_cub *cub)
 		mlx_destroy_image(cub->mlx.mlx, cub->gun[0].img);
 		mlx_destroy_image(cub->mlx.mlx, cub->gun[1].img);
 		mlx_destroy_image(cub->mlx.mlx, cub->gun[2].img);
-		free_cub(cub);
-		err("Couldn't open texture!\n");
+		clear_cub(cub);
+		err("Can not open texture\n");
 	}
 }
 
@@ -74,8 +74,8 @@ void	set_gun_4(t_cub *cub)
 		mlx_destroy_image(cub->mlx.mlx, cub->gun[1].img);
 		mlx_destroy_image(cub->mlx.mlx, cub->gun[2].img);
 		mlx_destroy_image(cub->mlx.mlx, cub->gun[3].img);
-		free_cub(cub);
-		err("Couldn't open texture!\n");
+		clear_cub(cub);
+		err("Can not open texture\n");
 	}
 }
 
@@ -87,8 +87,8 @@ void	set_guns(t_cub *cub)
 	if (!cub->gun)
 	{
 		destroy_doors_and_walls(cub);
-		free_cub(cub);
-		err("Malloc error!\n");
+		clear_cub(cub);
+		err("Memory allocation error\n");
 	}
 	set_gun_0_1(cub);
 	set_gun_2_3(cub);

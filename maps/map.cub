@@ -1,9 +1,10 @@
 NO ./textures/pat.xpm
-SO ./textures/patSkel.xpm
 WE ./textures/pat2.xpm
 EA ./textures/pat3.xpm
-F 24,133,216
-C   147,202,243
+SO ./textures/pat4.xpm
+F   160,168,60
+C 255,162,0
+
 
 	
 		 1111111111111111111111111   
